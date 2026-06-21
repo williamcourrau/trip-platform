@@ -9,26 +9,26 @@ k8s_yaml('./infra/development/k8s/app-config.yaml')
 
 ### API Gateway ###
 
-gateway_compile_cmd = 'mvn package -pl api-gateway -am -DskipTests -q'
+gateway_compile_cmd = 'mvn package -pl services/api-gateway -am -DskipTests -q'
 if os.name == 'nt':
-  gateway_compile_cmd = 'mvn package -pl api-gateway -am -DskipTests -q'
+  gateway_compile_cmd = 'mvn package -pl services/api-gateway -am -DskipTests -q'
 
 local_resource(
   'api-gateway-compile',
   gateway_compile_cmd,
-  deps=['./api-gateway', './common'], labels="compiles")
+  deps=['./services/api-gateway', './services/common'], labels="compiles")
 
 docker_build_with_restart(
   'trip-platform/api-gateway',
   '.',
-  entrypoint=['java', '-jar', '/app/api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar'],
+  entrypoint=['java', '-jar', '/app/services/api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar'],
   dockerfile='./infra/development/docker/api-gateway.Dockerfile',
   only=[
-    './api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar',
-    './common/target/common-0.0.1-SNAPSHOT.jar',
+    './services/api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar',
+    './services/common/target/common-0.0.1-SNAPSHOT.jar',
   ],
   live_update=[
-    sync('./api-gateway/target', '/app/api-gateway/target'),
+    sync('./services/api-gateway/target', '/app/services/api-gateway/target'),
   ],
 )
 
@@ -39,26 +39,26 @@ k8s_resource('api-gateway', port_forwards=8080,
 
 ### Trip Service ###
 
-trip_compile_cmd = 'mvn package -pl trip-service -am -DskipTests -q'
+trip_compile_cmd = 'mvn package -pl services/trip-service -am -DskipTests -q'
 if os.name == 'nt':
-  trip_compile_cmd = 'mvn package -pl trip-service -am -DskipTests -q'
+  trip_compile_cmd = 'mvn package -pl services/trip-service -am -DskipTests -q'
 
 local_resource(
   'trip-service-compile',
   trip_compile_cmd,
-  deps=['./trip-service', './common'], labels="compiles")
+  deps=['./services/trip-service', './services/common'], labels="compiles")
 
 docker_build_with_restart(
   'trip-platform/trip-service',
   '.',
-  entrypoint=['java', '-jar', '/app/trip-service/target/trip-service-0.0.1-SNAPSHOT.jar'],
+  entrypoint=['java', '-jar', '/app/services/trip-service/target/trip-service-0.0.1-SNAPSHOT.jar'],
   dockerfile='./infra/development/docker/trip-service.Dockerfile',
   only=[
-    './trip-service/target/trip-service-0.0.1-SNAPSHOT.jar',
-    './common/target/common-0.0.1-SNAPSHOT.jar',
+    './services/trip-service/target/trip-service-0.0.1-SNAPSHOT.jar',
+    './services/common/target/common-0.0.1-SNAPSHOT.jar',
   ],
   live_update=[
-    sync('./trip-service/target', '/app/trip-service/target'),
+    sync('./services/trip-service/target', '/app/services/trip-service/target'),
   ],
 )
 
@@ -69,26 +69,26 @@ k8s_resource('trip-service', port_forwards=8081,
 
 ### Driver Service ###
 
-driver_compile_cmd = 'mvn package -pl driver-service -am -DskipTests -q'
+driver_compile_cmd = 'mvn package -pl services/driver-service -am -DskipTests -q'
 if os.name == 'nt':
-  driver_compile_cmd = 'mvn package -pl driver-service -am -DskipTests -q'
+  driver_compile_cmd = 'mvn package -pl services/driver-service -am -DskipTests -q'
 
 local_resource(
   'driver-service-compile',
   driver_compile_cmd,
-  deps=['./driver-service', './common'], labels="compiles")
+  deps=['./services/driver-service', './services/common'], labels="compiles")
 
 docker_build_with_restart(
   'trip-platform/driver-service',
   '.',
-  entrypoint=['java', '-jar', '/app/driver-service/target/driver-service-0.0.1-SNAPSHOT.jar'],
+  entrypoint=['java', '-jar', '/app/services/driver-service/target/driver-service-0.0.1-SNAPSHOT.jar'],
   dockerfile='./infra/development/docker/driver-service.Dockerfile',
   only=[
-    './driver-service/target/driver-service-0.0.1-SNAPSHOT.jar',
-    './common/target/common-0.0.1-SNAPSHOT.jar',
+    './services/driver-service/target/driver-service-0.0.1-SNAPSHOT.jar',
+    './services/common/target/common-0.0.1-SNAPSHOT.jar',
   ],
   live_update=[
-    sync('./driver-service/target', '/app/driver-service/target'),
+    sync('./services/driver-service/target', '/app/services/driver-service/target'),
   ],
 )
 
@@ -99,26 +99,26 @@ k8s_resource('driver-service', port_forwards=8082,
 
 ### Payment Service ###
 
-payment_compile_cmd = 'mvn package -pl payment-service -am -DskipTests -q'
+payment_compile_cmd = 'mvn package -pl services/payment-service -am -DskipTests -q'
 if os.name == 'nt':
-  payment_compile_cmd = 'mvn package -pl payment-service -am -DskipTests -q'
+  payment_compile_cmd = 'mvn package -pl services/payment-service -am -DskipTests -q'
 
 local_resource(
   'payment-service-compile',
   payment_compile_cmd,
-  deps=['./payment-service', './common'], labels="compiles")
+  deps=['./services/payment-service', './services/common'], labels="compiles")
 
 docker_build_with_restart(
   'trip-platform/payment-service',
   '.',
-  entrypoint=['java', '-jar', '/app/payment-service/target/payment-service-0.0.1-SNAPSHOT.jar'],
+  entrypoint=['java', '-jar', '/app/services/payment-service/target/payment-service-0.0.1-SNAPSHOT.jar'],
   dockerfile='./infra/development/docker/payment-service.Dockerfile',
   only=[
-    './payment-service/target/payment-service-0.0.1-SNAPSHOT.jar',
-    './common/target/common-0.0.1-SNAPSHOT.jar',
+    './services/payment-service/target/payment-service-0.0.1-SNAPSHOT.jar',
+    './services/common/target/common-0.0.1-SNAPSHOT.jar',
   ],
   live_update=[
-    sync('./payment-service/target', '/app/payment-service/target'),
+    sync('./services/payment-service/target', '/app/services/payment-service/target'),
   ],
 )
 

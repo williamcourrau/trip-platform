@@ -7,9 +7,10 @@
         <groupId>com.trip</groupId>
         <artifactId>trip-platform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>payment-service</artifactId>
+    <artifactId>driver-service</artifactId>
 
     <dependencies>
         <dependency>
@@ -36,18 +37,16 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
-        <!-- gRPC client -->
+        <!-- gRPC client/server -->
+        <dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-server-spring-boot-starter</artifactId>
+            <version>${grpc-spring-boot.version}</version>
+        </dependency>
         <dependency>
             <groupId>net.devh</groupId>
             <artifactId>grpc-client-spring-boot-starter</artifactId>
             <version>${grpc-spring-boot.version}</version>
-        </dependency>
-
-        <!-- Stripe -->
-        <dependency>
-            <groupId>com.stripe</groupId>
-            <artifactId>stripe-java</artifactId>
-            <version>25.10.0</version>
         </dependency>
 
         <!-- OpenTelemetry -->

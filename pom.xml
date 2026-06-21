@@ -10,11 +10,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common</module>
-        <module>trip-service</module>
-        <module>driver-service</module>
-        <module>payment-service</module>
-        <module>api-gateway</module>
+        <module>services/common</module>
+        <module>services/trip-service</module>
+        <module>services/driver-service</module>
+        <module>services/payment-service</module>
+        <module>services/api-gateway</module>
     </modules>
 
     <properties>
