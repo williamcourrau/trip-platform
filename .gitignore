@@ -1,0 +1,39 @@
+### Maven ###
+target/
+*.jar
+*.war
+*.ear
+
+### IDE ###
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+*.swp
+*.swo
+
+### OS ###
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+### Logs ###
+logs/
+*.log
+
+### Env ###
+.env
+*.env.local
+
+### Build ###
+build/
+dist/
+*.class
+
+### Mongo data from docker ###
+mongo_data/
