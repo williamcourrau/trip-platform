@@ -4,23 +4,19 @@ server:
 spring:
   application:
     name: driver-service
-  datasource:
-    url: jdbc:h2:mem:driverdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/driver_db}
+      auto-index-creation: true
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+grpc:
+  server:
+    port: 9092
 
 logging:
   level:

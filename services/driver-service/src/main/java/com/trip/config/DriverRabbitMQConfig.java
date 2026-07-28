@@ -10,6 +10,11 @@ import static com.trip.config.RabbitMQConfig.*;
 public class DriverRabbitMQConfig {
 
     @Bean
+    public TopicExchange tripExchange() {
+        return new TopicExchange(TRIP_EXCHANGE);
+    }
+
+    @Bean
     public Queue findAvailableDriversQueue() {
         return new Queue(QUEUE_FIND_AVAILABLE_DRIVERS, true);
     }

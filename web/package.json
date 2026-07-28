@@ -1,0 +1,17 @@
+{
+  "name": "trip-platform-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --outdir=dist",
+    "start": "node src/server.js",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "eslint": "^9.0.0"
+  }
+}

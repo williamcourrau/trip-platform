@@ -10,6 +10,16 @@ import static com.trip.config.RabbitMQConfig.*;
 public class GatewayRabbitMQConfig {
 
     @Bean
+    public TopicExchange tripExchange() {
+        return new TopicExchange(TRIP_EXCHANGE);
+    }
+
+    @Bean
+    public TopicExchange paymentExchange() {
+        return new TopicExchange(PAYMENT_EXCHANGE);
+    }
+
+    @Bean
     public Queue notifyNewTripQueue() {
         return new Queue(QUEUE_NOTIFY_NEW_TRIP, true);
     }
@@ -22,6 +32,11 @@ public class GatewayRabbitMQConfig {
     @Bean
     public Queue notifyNoDriversFoundQueue() {
         return new Queue(QUEUE_NOTIFY_NO_DRIVERS_FOUND, true);
+    }
+
+    @Bean
+    public Queue notifyPaymentStatusQueue() {
+        return new Queue(QUEUE_NOTIFY_PAYMENT_STATUS, true);
     }
 
     @Bean
@@ -43,5 +58,12 @@ public class GatewayRabbitMQConfig {
         return BindingBuilder.bind(notifyNoDriversFoundQueue)
             .to(tripExchange)
             .with("trip.event.no_drivers_found");
+    }
+
+    @Bean
+    public Binding notifyPaymentStatusBinding(TopicExchange paymentExchange, Queue notifyPaymentStatusQueue) {
+        return BindingBuilder.bind(notifyPaymentStatusQueue)
+            .to(paymentExchange)
+            .with("payment.event.*");
     }
 }

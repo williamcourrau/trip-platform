@@ -10,6 +10,11 @@ import static com.trip.config.RabbitMQConfig.*;
 public class PaymentRabbitMQConfig {
 
     @Bean
+    public TopicExchange tripExchange() {
+        return new TopicExchange(TRIP_EXCHANGE);
+    }
+
+    @Bean
     public TopicExchange paymentExchange() {
         return new TopicExchange(PAYMENT_EXCHANGE);
     }

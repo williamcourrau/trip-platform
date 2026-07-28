@@ -4,28 +4,26 @@ server:
 spring:
   application:
     name: payment-service
-  datasource:
-    url: jdbc:h2:mem:paymentdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/payment_db}
+      auto-index-creation: true
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+grpc:
+  client:
+    trip-service:
+      address: static://localhost:8081
+      negotiation-type: plaintext
 
 logging:
   level:
     com.trip: DEBUG
 
 stripe:
-  api-key: sk_test_placeholder
-  webhook-secret: whsec_placeholder
+  api-key: ${STRIPE_API_KEY:sk_test_placeholder}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET:whsec_placeholder}

@@ -5,10 +5,22 @@ spring:
   application:
     name: api-gateway
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+grpc:
+  client:
+    trip-service:
+      address: static://localhost:9091
+      negotiation-type: plaintext
+    driver-service:
+      address: static://localhost:9092
+      negotiation-type: plaintext
+    payment-service:
+      address: static://localhost:9093
+      negotiation-type: plaintext
 
 logging:
   level:
